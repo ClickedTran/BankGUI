@@ -1,9 +1,9 @@
 # General
 <div align="center">
-<img src="https://github.com/ClickedTran/BankGUI/blob/Master/line.gif">
-<img src="https://github.com/ClickedTran/BankGUI/blob/Master/bank_icon.png">
+<img src="https://github.com/ClickedTran/BankGUI/blob/Master/line.gif"><br>
+<img src="https://github.com/ClickedTran/BankGUI/blob/Master/bank_icon.png" width="164px" height="auto"><br>
 <p>BankGUI for PocketMine-MP</p>
-<p>The plugin is inspired by a minecraft java server (<b>Minelock.online</b>)</p>
+<p>The plugin is inspired by a minecraft java server (<b>Minelock.online</b>)</p><br>
 <img src="https://github.com/ClickedTran/BankGUI/blob/Master/line.gif">
 </div>
 
