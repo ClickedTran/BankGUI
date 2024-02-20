@@ -24,20 +24,20 @@ use ClickedTran\BankGUI\language\data\{
 
 class LanguageManager {
   private BankGUI $plugin;
-  private $lang = "?";
+  private static $lang = "?";
   private $version = null;
   private static $langData = null;
   
   public function __construct(BankGUI $plugin, string $lang){
     $this->plugin = $plugin;
-    $this->lang = $lang;
-    self::$langData = new Config($this->plugin->getDataFolder() . "language/".$this->lang.".yml", Config::YAML, array());
+    self::$lang = $lang;
+    self::$langData = new Config($this->plugin->getDataFolder() . "language/".self::$lang.".yml", Config::YAML, array());
     $data = self::$langData->getAll();
     if(!isset($data["reset"]) or $data["reset"] === true){
       $this->reload();
       $this->getPlugin()->getLogger()->info(LanguageManager::getTranslate(
         "plugininfo.reload_language", 
-        [$this->getLanguage()]
+        [LanguageManager::getLanguage()]
       ));
     }
     
@@ -45,14 +45,14 @@ class LanguageManager {
       $this->reload();
       $this->getPlugin()->getLogger()->info(LanguageManager::getTranslate(
         "plugininfo.version_old",
-        [$this->getLanguage(), $this->getVersion()]
+        [LanguageManager::getLanguage(), $this->getVersion()]
       ));
     }else{
       $this->version = $data["version"];
       if($this->getVersion() !== 1){
          $this->getPlugin()->getLogger()->info(LanguageManager::getTranslate(
            "plugininfo.version_new",
-           [$this->getLanguage(), $this->getVersion()]
+           [LanguageManager::getLanguage(), $this->getVersion()]
          ));
       }
     }
@@ -61,20 +61,20 @@ class LanguageManager {
   public function reload() : void{
     if($this->getLanguage() === "vi-VN"){
       foreach(Vietnamese::init() as $key => $value){
-        self::$langData->setNested($key, $value);
+        LanguageManager::getLangData()->setNested($key, $value);
       }
     }
     
     if($this->getLanguage() === "en-US"){
       foreach(English::init() as $key => $value){
-        self::$langData->setNested($key, $value);
+        LanguageManager::getLangData()->setNested($key, $value);
       }
     }
-    self::$langData->save();
+    self::getLangData()->save();
   }
   
   public static function getTranslate(string|int $text, array $key = []) : string{
-    $data = self::$langData;
+    $data = LanguageManager::getLangData();
     if(!$data->exists($text)){
       $message = $data->getNested($text);
       for($i = 0; $i < count($key); $i++){
@@ -89,15 +89,15 @@ class LanguageManager {
     }
   }
   
-  public function getLanguage() : string {
-    return $this->lang;
+  public static function getLanguage() : string {
+    return sel::$lang;
   }
   
   public function getPlugin() : BankGUI {
     return $this->plugin;
   }
   
-  public static function getData() : Config {
+  public static function getLangData() : Config {
     return self::$langData;
   }
   
