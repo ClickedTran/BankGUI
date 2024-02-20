@@ -73,7 +73,7 @@ class English {
       "menu.button.2" => "§aCreate bank note",
       "menu.button.3" => "§aTransaction history",
       
-      "menu.button.exit" => "§cEXIY",
+      "menu.button.exit" => "§cEXIT",
       "menu.button.back" => "§cBack to the home",
       
       "menu.button.page.next" => "§bNext page",
