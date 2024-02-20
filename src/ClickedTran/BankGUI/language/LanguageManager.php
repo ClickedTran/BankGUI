@@ -25,7 +25,7 @@ use ClickedTran\BankGUI\language\data\{
 class LanguageManager {
   private static BankGUI $plugin;
   private static $lang = "?";
-  private static $version = null;
+  private $version = null;
   private static $langData = null;
   
   public function __construct(BankGUI $plugin, string $lang){
@@ -45,14 +45,14 @@ class LanguageManager {
       $this->reload();
       $this->getPlugin()->getLogger()->info(LanguageManager::getTranslate(
         "plugininfo.version_old",
-        [LanguageManager::getLanguage(), LanguageManager::getVersion()]
+        [LanguageManager::getLanguage(), $this->version]
       ));
     }else{
-      self::$version = $data["version"];
-      if(self::$version !== 1){
+      $this->version = $data["version"];
+      if($this->version !== 1){
          $this->getPlugin()->getLogger()->info(LanguageManager::getTranslate(
            "plugininfo.version_new",
-           [LanguageManager::getLanguage(),self::$version]
+           [LanguageManager::getLanguage(), $this->version]
          ));
       }
     }
@@ -101,7 +101,7 @@ class LanguageManager {
     return self::$langData;
   }
   
-  public static function getVersion() : int {
-    return self::$version;
+  public function getVersion() : int {
+    return $this->version;
   }
 }
