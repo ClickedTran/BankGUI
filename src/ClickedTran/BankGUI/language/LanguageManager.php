@@ -48,11 +48,11 @@ class LanguageManager {
         [LanguageManager::getLanguage(), LanguageManager::getVersion()]
       ));
     }else{
-      LanguageManager::getVersion() = $data["version"];
-      if(LanguageManager::getVersion() !== 1){
+      self::$version = $data["version"];
+      if(self::$version !== 1){
          $this->getPlugin()->getLogger()->info(LanguageManager::getTranslate(
            "plugininfo.version_new",
-           [LanguageManager::getLanguage(), LanguageManager::getVersion()]
+           [LanguageManager::getLanguage(),self::$version]
          ));
       }
     }
