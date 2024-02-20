@@ -41,13 +41,7 @@ class LanguageManager {
       ));
     }
     
-    if(!isset($data["version"])){
-      $this->reload();
-      $this->getPlugin()->getLogger()->info(LanguageManager::getTranslate(
-        "plugininfo.version_old",
-        [LanguageManager::getLanguage(), $this->getVersion()]
-      ));
-    }else{
+    if(isset($data["version"])){
       $this->version = $data["version"];
       if($this->getVersion() !== 1){
          $this->getPlugin()->getLogger()->info(LanguageManager::getTranslate(
@@ -55,6 +49,12 @@ class LanguageManager {
            [LanguageManager::getLanguage(), $this->getVersion()]
          ));
       }
+    }else{
+      $this->reload();
+      $this->getPlugin()->getLogger()->info(LanguageManager::getTranslate(
+        "plugininfo.version_old",
+        [LanguageManager::getLanguage(), $this->getVersion()]
+      ));
     }
   }
   
