@@ -20,8 +20,6 @@ class Vietnamese {
       "version" => 1,
       "plugininfo.use_ingame" => "§aVui lòng sử dụng lệnh trong trò chơi",
       "plugininfo.reload_language" => "§aNgôn ngữ §b%1 §ađã được tải lại!",
-      "plugininfo.version_old" => "§aDữ liệu của ngôn ngữ §b%1 §ađã cũ, vui lòng cập nhật!",
-      "plugininfo.version_new" => "§aDữ liệu của ngôn ngữ §b%1 §ađang là phiên bản mới nhất!",
       "plugininfo.message_not_found" => "§aTin nhắn §b%1 §bkhông tồn tại trong dữ liệu của ngôn ngữ §d%2",
       
       "playerinfo.money" => "§aSố tiền của bạn: §b%1",
