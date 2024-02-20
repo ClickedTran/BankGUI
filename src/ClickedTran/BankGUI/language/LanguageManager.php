@@ -23,13 +23,13 @@ use ClickedTran\BankGUI\language\data\{
 };
 
 class LanguageManager {
-  private BankGUI $plugin;
+  private static BankGUI $plugin;
   private static $lang = "?";
-  private $version = null;
+  private static $version = null;
   private static $langData = null;
   
   public function __construct(BankGUI $plugin, string $lang){
-    $this->plugin = $plugin;
+    self::$plugin = $plugin;
     self::$lang = $lang;
     self::$langData = new Config($this->plugin->getDataFolder() . "language/".self::$lang.".yml", Config::YAML, array());
     $data = self::$langData->getAll();
@@ -45,14 +45,14 @@ class LanguageManager {
       $this->reload();
       $this->getPlugin()->getLogger()->info(LanguageManager::getTranslate(
         "plugininfo.version_old",
-        [LanguageManager::getLanguage(), $this->getVersion()]
+        [LanguageManager::getLanguage(), LanguageManager::getVersion()]
       ));
     }else{
       $this->version = $data["version"];
       if($this->getVersion() !== 1){
          $this->getPlugin()->getLogger()->info(LanguageManager::getTranslate(
            "plugininfo.version_new",
-           [LanguageManager::getLanguage(), $this->getVersion()]
+           [LanguageManager::getLanguage(), LanguageManager::getVersion()]
          ));
       }
     }
@@ -84,24 +84,24 @@ class LanguageManager {
     }else{
       return LanguageManager::getTranslate(
         "plugininfo.message_not_found", 
-        [$text, self::getLanguage()]
+        [$text, LanguageManager::getLanguage()]
       );
     }
   }
   
   public static function getLanguage() : string {
-    return sel::$lang;
+    return self::$lang;
   }
   
-  public function getPlugin() : BankGUI {
-    return $this->plugin;
+  public static function getPlugin() : BankGUI {
+    return self::$plugin;
   }
   
   public static function getLangData() : Config {
     return self::$langData;
   }
   
-  public function getVersion() : int {
-    return $this->version;
+  public static function getVersion() : int {
+    return self::$version;
   }
 }
