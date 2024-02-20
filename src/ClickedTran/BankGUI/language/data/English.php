@@ -20,8 +20,6 @@ class English {
       "version" => 1,
       "plugininfo.use_ingame" => "§aPlease use in-game commands",
       "plugininfo.reload_language" => "§aLanguage §b%1 §ahas been reloaded!",
-      "plugininfo.version_old" => "§aThe data for language §b%1 §ais outdated, please update!",
-      "plugininfo.version_new" => "§aThe data of the language §b%1 §ais the latest version!",
       "plugininfo.message_not_found" => "§aMessage §b%1 §bdoes not exist in the data of language §d%2",
       
       "playerinfo.money" => "§aYour money: §b%1",
