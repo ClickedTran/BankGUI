@@ -41,13 +41,13 @@ class TaskManager extends Task {
           if($data->get("transaction") === []){
              $data->set("transaction", array_merge($data->get("transaction"), ["§9[§c".date("H:i:s d/m/y")."§9] - ".LanguageManager::getTranslate(
                "bank.claimed_interest",
-               [$recevied_money]
+               ["$".$recevied_money]
                )]));
              $data->save();
           }else{
              $data->set("transaction", array_merge($data->get("transaction"), ["§9[§c".date("H:i:s d/m/y")."§9] - ".LanguageManager::getTranslate(
                "bank.claimed_interest",
-               [$recevied_money]
+               ["$".$recevied_money]
                )]));
              $data->save();
           }
@@ -55,8 +55,8 @@ class TaskManager extends Task {
        foreach($this->plugin->getServer()->getOnlinePlayers() as $player){
            $money = (($this->plugin->getBankManager($player)->getMoney()*$interest)/100);
            $player->sendMessage(BankGUI::PREFIX . LanguageManager:: getTranslate(
-             "bank.player_claimed_interst",
-             [$money]));
+             "bank.player_claimed_interest",
+             ["$".$money]));
        }
     }
   }
