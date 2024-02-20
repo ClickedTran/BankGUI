@@ -52,11 +52,11 @@ $api->getMoney();
 ```
 ### Reduce Player Money In Bank
 ```php
-$api->reduceMoney(int $amount);
+$api->reduceMoney(int|float $amount);
 ```
 ### Add Player Money In Bank
 ```php
-$api->addMoney(int $amount);
+$api->addMoney(int|float $amount);
 ```
 ### Get All Transaction
 ```php
