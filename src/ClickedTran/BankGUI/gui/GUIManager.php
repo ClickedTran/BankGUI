@@ -125,7 +125,7 @@ class GUIManager {
         $plugin->getEconomyData()->getMoney($player, function(int|float $money) use ($player, $plugin){
           $add_bank = $money/2;
           $plugin->getBankManager($player)->addMoney($add_bank);
-          $plugin->getEconomyData()->takeMoney($player, (int)$add_bank);
+          $plugin->getEconomyData()->takeMoney($player, $add_bank);
           $plugin->getBankManager($player)->addTransaction(LanguageManager::getTranslate(
             "bank.deposit.transaction",
             ["$".$add_bank]
