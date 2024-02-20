@@ -45,7 +45,7 @@ class LanguageManager {
       $this->reload();
       $this->getPlugin()->getLogger()->info(LanguageManager::getTranslate(
         "plugininfo.version_old",
-        [LanguageManager::getLanguage(), $this->version]
+        [LanguageManager::getLanguage(), $this->getVersion()]
       ));
     }else{
       $this->version = $data["version"];
