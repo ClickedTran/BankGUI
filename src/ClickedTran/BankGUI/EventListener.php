@@ -51,7 +51,7 @@ class EventListener implements Listener {
       }else{
         if($args[0] == "all"){
           $this->plugin->getEconomyData()->getMoney($player, function(int|float $money) use ($player){
-            $this->plugin->getBankManager($player)->addMoney((int)$money);
+            $this->plugin->getBankManager($player)->addMoney($money);
             $this->plugin->getEconomyData()->takeMoney($player, $money);
             $this->plugin->getBankManager($player)->addTransaction(LanguageManager::getTranslate(
               "bank.deposit.transaction",
@@ -72,7 +72,7 @@ class EventListener implements Listener {
         
         if(is_numeric($args[0])){
           $this->plugin->getEconomyData()->getMoney($player, function(int|float $money) use ($player, $args){
-            if($money < $args[0]){
+            if($money < (int)$args[0]){
                $player->sendMessage(BankGUI::PREFIX . LanguageManager::getTranslate(
                  "bank.deposit.fail",
                  ["$".$args[0]]
@@ -106,7 +106,7 @@ class EventListener implements Listener {
        }else{
          if($args[0] == "all"){
             $money = $this->plugin->getBankManager($player)->getMoney();
-            $this->plugin->getBankManager($player)->reduceMoney((int)$money);
+            $this->plugin->getBankManager($player)->reduceMoney($money);
             $this->plugin->getEconomyData()->giveMoney($player, $money);
             $player->sendMessage(BankGUI::PREFIX . LanguageManager::getTranslate(
               "bank.withdraw.message",
@@ -132,8 +132,8 @@ class EventListener implements Listener {
                 ));
               unset($this->plugin->takeCustom[$player->getName()]);
            }else{
-             $this->plugin->getBankManager($player)->reduceMoney((int)$args[0]);
-             $this->plugin->getEconomyData()->giveMoney($player, (int)$args[0]);
+             $this->plugin->getBankManager($player)->reduceMoney($args[0]);
+             $this->plugin->getEconomyData()->giveMoney($player, $args[0]);
              $this->plugin->getBankManager($player)->addTransaction(LanguageManager::getTranslate(
                "bank.withdraw.transaction",
                ["$".$args[0]]
@@ -158,7 +158,7 @@ class EventListener implements Listener {
        }else{
          if($args[0] == "all"){
             $money = $this->plugin->getBankManager($player)->getMoney();
-            $this->plugin->getBankManager($player)->reduceMoney((int)$money);
+            $this->plugin->getBankManager($player)->reduceMoney($money);
             $item = StringToItemParser::getInstance()->parse("paper");
             $item->setCustomName(LanguageManager::getTranslate("banknote.create.name"));
             $item->setLore(["\n". LanguageManager::getTranslate(
@@ -192,7 +192,7 @@ class EventListener implements Listener {
                ));
              unset($this->plugin->bankNote[$player->getName()]);
            }else{
-             $this->plugin->getBankManager($player)->reduceMoney((int)$args[0]);
+             $this->plugin->getBankManager($player)->reduceMoney($args[0]);
              $item = StringToItemParser::getInstance()->parse("paper");
              $item->setCustomName(LanguageManager::getTranslate("banknote.create.name"));
              $item->setLore(["\n". LanguageManager::getTranslate(
@@ -200,7 +200,7 @@ class EventListener implements Listener {
               ["$".$args[0], $player->getName()]
               )]);
              $item->addEnchantment(new EnchantmentInstance(EnchantmentIdMap::getInstance()->fromId(BankGUI::FAKE_ENCHANTMENT)));
-             $item->getNamedTag()->setFloat("Amount", (int)$args[0]);
+             $item->getNamedTag()->setFloat("Amount", $args[0]);
              $player->getInventory()->addItem($item);
              $this->plugin->getBankManager($player)->addTransaction(LanguageManager::getTranslate(
                "banknote.create.transaction",
