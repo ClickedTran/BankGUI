@@ -267,7 +267,7 @@ class GUIManager {
        $inv->setItem(50, StringToItemParser::getInstance()->parse("arrow")->setCustomName(LanguageManager::getTranslate("menu.button.page.next")));
     }
       
-    $menu->setListener(function(InvMenuTransaction $transaction) use ($player, $pages, $total_page, $inv) : InvMenuTransactionResult {
+    $menu->setListener(function(InvMenuTransaction $transaction) use ($player, $pages, $total_page) : InvMenuTransactionResult {
       $action = $transaction->getAction();
       $item = $transaction->getItemClicked();
         
