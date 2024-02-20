@@ -18,7 +18,7 @@ class English {
     return [
       "reset" => false,
       "version" => 1,
-      "plugininfo.use_ingame" => "§aPlease use in-game commands",
+      "plugininfo.use_ingame" => "§aPlease use command in-game!",
       "plugininfo.reload_language" => "§aLanguage §b%1 §ahas been reloaded!",
       "plugininfo.message_not_found" => "§aMessage §b%1 §bdoes not exist in the data of language §d%2",
       
@@ -31,11 +31,12 @@ class English {
       "playerinfo.transfer.transaction" => "§aTransfer the amount §b%1 §ato the bank of §9%2",
       "playerinfo.transfer.player_claimed.transaction" => "§aReceive §b%1 §afrom player §9%2",
       
+      "bank.create" => "§aCreate new account successfully!",
       "bank.error" => "§cInvalid operation, please try again!",
       "bank.cancel" => "§aYou have successfully canceled the operation!",
       
-      "bank.claimed_interst" => "§aReceive §b%1 §ato account from interest",
-      "bank.player_claimed_interst" => "§aYou have received the amount §b%1 §ainto your bank account from interest!",
+      "bank.claimed_interest" => "§aReceive §b%1 §ato account from interest",
+      "bank.player_claimed_interest" => "§aYou have received the amount §b%1 §ainto your bank account from interest!",
       
       "bank.deposit.half" => "§aDeposit half",
       "bank.deposit.custom" => "§aDeposit custom",
@@ -54,6 +55,7 @@ class English {
       "bank.withdraw.fail" => "§cYou do not have enough §b%1 §camount in the bank to withdraw!",
       
       "bank.create_bank_note" => "§aEnter §ball §a to create a check for the full amount §f/§a Enter §bcancel §a to cancel the operation",
+
       
       "banknote.create.name" => "§l§bBANK NOTE",
       "banknote.create.lore" => "§aBank note have value: §b%1\n§aCreated by: §9%2\n \n§9( §bRIGHT CLICK TO USE §9)",
