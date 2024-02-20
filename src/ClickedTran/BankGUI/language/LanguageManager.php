@@ -84,7 +84,7 @@ class LanguageManager {
     }else{
       return LanguageManager::getTranslate(
         "plugininfo.message_not_found", 
-        [$text, $this->getLanguage()]
+        [$text, self::getLanguage()]
       );
     }
   }
