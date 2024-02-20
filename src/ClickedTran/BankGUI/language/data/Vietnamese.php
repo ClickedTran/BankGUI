@@ -31,11 +31,12 @@ class Vietnamese {
       "playerinfo.transfer.transaction" => "§aChuyển số tiền §b%1 §ađến ngân hàng của §9%2",
       "playerinfo.transfer.player_claimed.transaction" => "§aNhận §b%1 §atừ người chơi §9%2",
       
+      "bank.create" => "§Tạo tài khoản mới thành công!",
       "bank.error" => "§cThao tác không hợp lệ, vui lòng thử lại!",
       "bank.cancel" => "§aBạn đã hủy thao tác thành công!",
       
-      "bank.claimed_interst" => "§aNhận được §b%1 §avào tài khoản từ lãi xuất",
-      "bank.player_claimed_interst" => "§aBạn đã nhận được số tiền §b%1 §avào tài khoản ngân hàng từ lãi xuất!",
+      "bank.claimed_interest" => "§aNhận được §b%1 §avào tài khoản từ lãi xuất",
+      "bank.player_claimed_interest" => "§aBạn đã nhận được số tiền §b%1 §avào tài khoản ngân hàng từ lãi xuất!",
       
       "bank.deposit.half" => "§aGửi một nửa",
       "bank.deposit.custom" => "§aGửi tùy chỉnh",
