@@ -47,12 +47,12 @@ final class BankManager {
     return $this->getData()->get("money");
   }
   
-  public function addMoney(int $money){
+  public function addMoney(int|float $money){
     $this->getData()->set("money", $this->getData()->get("money") + $money);
     $this->getData()->save();
   }
   
-  public function reduceMoney(int $money){
+  public function reduceMoney(int|float $money){
     $this->getData()->set("money", $this->getData()->get("money") - $money);
     $this->getData()->save();
   }
