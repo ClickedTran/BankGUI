@@ -44,17 +44,11 @@ class LanguageManager {
     if(isset($data["version"])){
       $this->version = $data["version"];
       if($this->getVersion() !== 1){
-         $this->getPlugin()->getLogger()->info(LanguageManager::getTranslate(
-           "plugininfo.version_old",
-           [LanguageManager::getLanguage(), $this->version]
-         ));
+         $this->getPlugin()->getLogger()->info("Language ".self::getLanguage()." outdated, please update!");
       }
     }else{
       $this->reload();
-      $this->getPlugin()->getLogger()->info(LanguageManager::getTranslate(
-        "plugininfo.version_new",
-        [LanguageManager::getLanguage(), $this->version]
-      ));
+      $this->getPlugin()->getLogger()->info("Language ".self::getLanguage()." is the latest version!");
     }
   }
   
