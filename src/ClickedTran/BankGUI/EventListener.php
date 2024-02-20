@@ -36,6 +36,7 @@ class EventListener implements Listener {
     $player = $event->getPlayer();
     if(!file_exists($this->plugin->getDataFolder() . "bank/".$player->getName().".yml")){
        $this->plugin->getBankManager($player)->createPlayerData();
+       $this->plugin->getBankManager($player)->addTransaction("Bank Registration");
     }
   }
        
