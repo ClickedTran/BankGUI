@@ -70,8 +70,4 @@ final class BankManager {
        $this->getData()->save();
     }
   }
-  
-  public function saveAll() : void{
-    $this->getData()->saveAll();
-  }
 }
