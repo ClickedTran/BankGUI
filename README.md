@@ -42,7 +42,7 @@ If you want a language of your country in this plugin please contact me via <b>d
 - [libPiggyEconomy](https://github.com/DaPigGuy/libPiggyEconomy)(DaPigGuy)
 
 # Contact
-- Discord: **`@clickedtran_vn`**
-- Youtube: [ClickedTran_VN](https://youtube.com/@clickedtran_vn)
-- Telegram: [ClickedTran](https://t.me/clickedtran1)
-- Facebook: [Phát Trần](https://facebook.com/clicked.tran.01)
+[![DISCORD](https://img.shields.io/badge/ClickedTran_VN-white?logo=discord&logoColor=white&label=Discord&labelColor=blue&color=yellow)](https://discord.com/invite/ZgWveaFH)
+[![YOUTUBE]((https://youtube.com/@clickedtran_vn)
+[![TELEGRAM](https://img.shields.io/badge/ClickedTran-white?logo=telegram&logoColor=blue&label=Telegram&labelColor=white&color=0000FF&link)](https://t.me/clickedtran1)
+[![FACEBOOK](https://img.shields.io/badge/Ph%C3%A1t_Tr%E1%BA%A7n-blue?logo=facebook&logoColor=white&label=Facebook&labelColor=blue&color=g)](https://facebook.com/clicked.tran.01)
