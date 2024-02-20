@@ -49,10 +49,10 @@ class LanguageManager {
       ));
     }else{
       $this->version = $data["version"];
-      if($this->version !== 1){
+      if($this->getVersion() !== 1){
          $this->getPlugin()->getLogger()->info(LanguageManager::getTranslate(
            "plugininfo.version_new",
-           [LanguageManager::getLanguage(), $this->version]
+           [LanguageManager::getLanguage(), $this->getVersion()]
          ));
       }
     }
