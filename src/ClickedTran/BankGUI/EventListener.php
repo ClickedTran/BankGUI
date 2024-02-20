@@ -52,7 +52,7 @@ class EventListener implements Listener {
         if($args[0] == "all"){
           $this->plugin->getEconomyData()->getMoney($player, function(int|float $money) use ($player){
             $this->plugin->getBankManager($player)->addMoney((int)$money);
-            $this->plugin->getEconomyData()->takeMoney($player, (int)$money);
+            $this->plugin->getEconomyData()->takeMoney($player, $money);
             $this->plugin->getBankManager($player)->addTransaction(LanguageManager::getTranslate(
               "bank.deposit.transaction",
               ["$".$money]
@@ -107,7 +107,7 @@ class EventListener implements Listener {
          if($args[0] == "all"){
             $money = $this->plugin->getBankManager($player)->getMoney();
             $this->plugin->getBankManager($player)->reduceMoney((int)$money);
-            $this->plugin->getEconomyData()->giveMoney($player, (int)$money);
+            $this->plugin->getEconomyData()->giveMoney($player, $money);
             $player->sendMessage(BankGUI::PREFIX . LanguageManager::getTranslate(
               "bank.withdraw.message",
               ["$".$money]
