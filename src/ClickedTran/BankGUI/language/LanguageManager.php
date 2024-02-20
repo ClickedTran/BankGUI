@@ -25,7 +25,7 @@ use ClickedTran\BankGUI\language\data\{
 class LanguageManager {
   private static BankGUI $plugin;
   private static $lang = "?";
-  private static $version = 1;
+  private static $version = null;
   private static $langData = null;
   
   public function __construct(BankGUI $plugin, string $lang){
