@@ -44,7 +44,7 @@ class EventListener implements Listener {
     if(isset($this->plugin->addCustom[$player->getName()])){
       $event->cancel();
       $args = explode(" ", $event->getMessage());
-      if(!$args[0] == "all" || !$args[0] == "cancel"){
+      if(!$args[0] == "all" and !$args[0] == "cancel"){
         $player->sendMessage(BankGUI::PREFIX . LanguageManager::getTranslate("bank.error"));
          unset($this->plugin->addCustom[$player->getName()]);
          return;
@@ -99,7 +99,7 @@ class EventListener implements Listener {
     if(isset($this->plugin->takeCustom[$player->getName()])){
        $event->cancel();
        $args = explode(" ", $event->getMessage());
-       if(!$args[0] == "all" || !$args[0] == "cancel"){
+       if(!$args[0] == "all" and !$args[0] == "cancel"){
          $player->sendMessage(BankGUI::PREFIX . LanguageManager::getTranslate("bank.error"));
          unset($this->plugin->takeCustom[$player->getName()]);
          return;
@@ -147,33 +147,11 @@ class EventListener implements Listener {
          }
        }
     }
-/**    
-    if(isset($this->plugin->transferToPlayer[$player->getName()])){
-      $event->cancel();
-      $args = explode(" ", $event->getMessage());
-      $players = $this->plugin->getServer()->getPlayerExact($this->plugin->transferToPlayer[$player->getName()]);
-      if(!is_numeric($args[0]) or $args[0] <= -1){
-          $player->sendMessage(BankGUI::PREFIX . LanguageManager::getTranslate("bank.error"));
-          return;
-       }
-       
-       if($this->plugin->getBankManager($player)->getMoney() < $args[0]){
-          $player->sendMessage("§9[ §4BANKGUI §9]§c Your money in the bank is not enough §b".$args[0]." §cto transfer!");
-       }else{
-         $this->plugin->getBankManager($player)->reduceMoney((int)$args[0]);
-         $this->plugin->getBankManager($players)->addMoney((int)$args[0]);
-         $this->plugin->getBankManager($player)->addTransaction("Transfer §b$".$args[0] ."§a to §9".$players);
-         $this->plugin->getBankManager($players)->addTransaction("Get §b$".$args[0]."§a from §9".$player->getName());
-         $players->sendMessage("§9[ §4BANKGUI §9]§a You got §b$".$args[0]."§a into the bank from §9".$player->getName()."'s bank!");
-         $player->sendMessage("§9[ §4BANKGUI §9]§a You have transferred the amount §b$".$args[0]."§a to ".$players."'s bank!");
-         unset($this->plugin->transferToPlayer[$player->getName()]);
-       }
-    }
-  */  
+    
     if(isset($this->plugin->bankNote[$player->getName()])){
        $event->cancel();
        $args = explode(" ", $event->getMessage());
-       if(!$args[0] == "all" || !$args[0] == "cancel"){
+       if(!$args[0] == "all" and !$args[0] == "cancel"){
           $player->sendMessage(BankGUI::PREFIX . LanguageManager::getTranslate("bank.error"));
           unset($this->plugin->bankNote[$player->getName()]);
           return;
