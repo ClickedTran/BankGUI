@@ -31,8 +31,8 @@ class LanguageManager {
   public function __construct(BankGUI $plugin, string $lang){
     self::$plugin = $plugin;
     self::$lang = $lang;
-    self::$langData = new Config($this->plugin->getDataFolder() . "language/".self::$lang.".yml", Config::YAML, array());
-    $data = self::$langData->getAll();
+    self::$langData = new Config(self::getPlugin()->getDataFolder() . "language/".self::$lang.".yml", Config::YAML, array());
+    $data = self::getLangData()->getAll();
     if(!isset($data["reset"]) or $data["reset"] === true){
       $this->reload();
       $this->getPlugin()->getLogger()->info(LanguageManager::getTranslate(
