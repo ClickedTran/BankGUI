@@ -1,4 +1,4 @@
-# General
+## General
 <div align="center">
 <img src="https://github.com/ClickedTran/BankGUI/blob/Master/line.gif"><br>
 <img src="https://github.com/ClickedTran/BankGUI/blob/Master/bank_icon.png" width="164px" height="auto"><br>
@@ -7,18 +7,18 @@
 <img src="https://github.com/ClickedTran/BankGUI/blob/Master/line.gif">
 </div>
 
-# Features
+## Features
 - [x] Multi Language
 - [x] Transfer money to other player's bank
 - [x] Interest rate per day
 - [x] Deposit / Withdraw money
 
-# Command
+## Command
 | **COMMAND** | **DESCRIPTION** | **PERMISSION** | **ALIASES** |
 | --- | --- | --- | --- |
 | `/bankgui` | `Open Bank Menu` | *`bankgui.command`* | `/bank` |
 
-# Config
+## Config
 ```yaml
 language: en-US #change it to `vi-VN` if you want use Vietnamese language!
 economy-type:
@@ -30,18 +30,50 @@ time-to-add-interest: "00:00"
 interest: 0.1 #cannot be less than 0, example: `0.1`
 ```
 
-# Language Supported
+## Language Supported
 - [x] Vietnamese (vi-VN)
 - [x] English (en-US)
 <br>
 If you want a language of your country in this plugin please contact me via <b>discord, facebook, telegram</b>
 
-# Virions
+## Virions
 - [InvMenu](https://github.com/muqsit/InvMenu)(Muqsit)
 - [FormAPI](https://github.com/jojoe77777/FormAPI)(jojoe77777)
 - [libPiggyEconomy](https://github.com/DaPigGuy/libPiggyEconomy)(DaPigGuy)
 
-# Contact
+## For Developer
+### API
+```php
+$api = BankGUI::getInstance()->getBankManager($player);
+```
+### Get Player Money In Bank
+```php
+$api->getMoney();
+```
+### Reduce Player Money In Bank
+```php
+$api->reduceMoney(int|float $amount);
+```
+### Add Player Money In Bank
+```php
+$api->addMoney(int|float $amount);
+```
+### Get All Transaction
+```php
+$api->getTransaction() : array{
+
+EXAMPLE:
+foreach($api->getTransaction() as $list => $transaction){
+    //@params $form instanceof FormAPI
+    $form->setContent("All your transactions:, $list);
+}
+```
+### Add New Transaction
+```php
+$api->addTransaction(string $text);
+```
+
+## Contact
 [![DISCORD](https://img.shields.io/badge/ClickedTran_VN-white?logo=discord&logoColor=white&label=Discord&labelColor=blue&color=yellow)](https://discord.com/invite/ZgWveaFH)
 [![YOUTUBE](https://img.shields.io/badge/ClickedTran_VN-white?logo=youtube&logoColor=red&label=Youtube&labelColor=white&color=blue)](https://youtube.com/@clickedtran_vn)
 
