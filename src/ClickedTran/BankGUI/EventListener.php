@@ -44,7 +44,7 @@ class EventListener implements Listener {
     if(isset($this->plugin->addCustom[$player->getName()])){
       $event->cancel();
       $args = explode(" ", $event->getMessage());
-      if(!$args[0] == "all" and !$args[0] == "cancel"){
+      if($args[0] != "all" and $args[0] != "cancel"){
         $player->sendMessage(BankGUI::PREFIX . LanguageManager::getTranslate("bank.error"));
          unset($this->plugin->addCustom[$player->getName()]);
          return;
@@ -99,7 +99,7 @@ class EventListener implements Listener {
     if(isset($this->plugin->takeCustom[$player->getName()])){
        $event->cancel();
        $args = explode(" ", $event->getMessage());
-       if(!$args[0] == "all" and !$args[0] == "cancel"){
+       if($args[0] != "all" and $args[0] != "cancel"){
          $player->sendMessage(BankGUI::PREFIX . LanguageManager::getTranslate("bank.error"));
          unset($this->plugin->takeCustom[$player->getName()]);
          return;
@@ -151,7 +151,7 @@ class EventListener implements Listener {
     if(isset($this->plugin->bankNote[$player->getName()])){
        $event->cancel();
        $args = explode(" ", $event->getMessage());
-       if(!$args[0] == "all" and !$args[0] == "cancel"){
+       if($args[0] != "all" and $args[0] != "cancel"){
           $player->sendMessage(BankGUI::PREFIX . LanguageManager::getTranslate("bank.error"));
           unset($this->plugin->bankNote[$player->getName()]);
           return;
