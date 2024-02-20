@@ -122,7 +122,7 @@ class GUIManager {
     switch($item->getCustomName()){
       /**ADD MONEY INTO BANK*/
       case LanguageManager::getTranslate('bank.deposit.half'):
-        $plugin->getEconomyData()->getMoney($player, function(int|float $money) use ($player, $inv, $plugin){
+        $plugin->getEconomyData()->getMoney($player, function(int|float $money) use ($player, $plugin){
           $add_bank = $money/2;
           $plugin->getBankManager($player)->addMoney($add_bank);
           $plugin->getEconomyData()->takeMoney($player, (int)$add_bank);
@@ -267,7 +267,7 @@ class GUIManager {
        $inv->setItem(50, StringToItemParser::getInstance()->parse("arrow")->setCustomName(LanguageManager::getTranslate("menu.button.page.next")));
     }
       
-    $menu->setListener(function(InvMenuTransaction $transaction) use ($player, $data, $pages, $playerList, $total_page, $inv, $i) : InvMenuTransactionResult {
+    $menu->setListener(function(InvMenuTransaction $transaction) use ($player, $pages, $total_page, $inv) : InvMenuTransactionResult {
       $action = $transaction->getAction();
       $item = $transaction->getItemClicked();
         
@@ -287,10 +287,9 @@ class GUIManager {
         case LanguageManager::getTranslate("menu.button.back"):
           $player->removeCurrentWindow();
           $this->bankMenu($player);
-        break;    
-      }
-      if($inv->getItem(49)){
-         return $transaction->discard();
+        break;  
+        case LanguageManager::getTranslate("menu.button.page.total"):
+        break;
       }
       return $transaction->discard();
     });
