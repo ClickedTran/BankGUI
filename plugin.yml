@@ -1,0 +1,10 @@
+name: BankGUI
+version: 1.0.0
+api: 5.0.0
+author: ClickedTran
+main: ClickedTran\BankGUI\BankGUI
+virions: ["InvMenu", "libPiggyEconomy", "FormAPI"]
+
+permissions:
+ bankgui.command:
+  default: true
