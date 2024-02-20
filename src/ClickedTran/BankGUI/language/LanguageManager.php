@@ -53,7 +53,7 @@ class LanguageManager {
       $this->reload();
       $this->getPlugin()->getLogger()->info(LanguageManager::getTranslate(
         "plugininfo.version_new",
-        [LanguageManager::getLanguage(), $this->version)]
+        [LanguageManager::getLanguage(), $this->version]
       ));
     }
   }
