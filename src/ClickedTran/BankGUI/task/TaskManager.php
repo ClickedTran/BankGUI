@@ -35,7 +35,7 @@ class TaskManager extends Task {
        foreach(glob($this->plugin->getDataFolder() . "bank/*.yml") as $player){
           $data = new Config($player);
           $playerMoney = $data->get("money");
-          $recevied_money = (($playerMoney*$interest)/100);
+          $recevied_money = ($playerMoney*($interest/100));
           $data->set("money", $data->get("money") + $recevied_money);
           $data->save();
           if($data->get("transaction") === []){
@@ -53,7 +53,7 @@ class TaskManager extends Task {
           }
        }
        foreach($this->plugin->getServer()->getOnlinePlayers() as $player){
-           $money = (($this->plugin->getBankManager($player)->getMoney()*$interest)/100);
+           $money = ($this->plugin->getBankManager($player)->getMoney()*($interest/100));
            $player->sendMessage(BankGUI::PREFIX . LanguageManager:: getTranslate(
              "bank.player_claimed_interest",
              ["$".$money]));
