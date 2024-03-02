@@ -51,8 +51,10 @@ class English {
       "bank.withdraw.custom_message" => "§aEnter §ball §ato withdraw all §f/§a Enter §bcancel §ato cancel the operation",
       "bank.withdraw.all" => "§aWithdraw all",
       "bank.withdraw.message" => "§aYou have withdrawn §b%1 §ara from the bank!",
-      "bank.withdraw.transaction" => "§aWithdraw §b%1 §ara from the bank!",
+      "bank.withdraw.transaction" => "§aWithdraw §b%1 §afrom the bank!",
       "bank.withdraw.fail" => "§cYou do not have enough §b%1 §camount in the bank to withdraw!",
+      
+      "bank.transfer.custom_message" => "§aEnter §ball §ato transfer all §f/§a Enter §bcancel §ato cancel the operation",
       
       "bank.create_bank_note" => "§aEnter §ball §a to create a check for the full amount §f/§a Enter §bcancel §a to cancel the operation",
 
@@ -69,6 +71,8 @@ class English {
       
       "menu.title.bank_transaction_history" => "§bTransaction history",
       
+      "menu.title.bank_transfer" => "§bBankGUI §f| §cTRANSFER",
+      
       "menu.button.1" => "§aTransfer",
       "menu.button.2" => "§aCreate bank note",
       "menu.button.3" => "§aTransaction history",
@@ -78,14 +82,7 @@ class English {
       
       "menu.button.page.next" => "§bNext page",
       "menu.button.page.previous" => "§bPrevious page",
-      "menu.button.page.total" => "§b%1 §f/ §9%2",
-      
-      "form.title" => "§bBankGUI §f| §cTRANSFER",
-      "form.dropdown" => "Select players:",
-      "form.input" => "§aEnter the amount you want to transfer",
-      
-      "form.not_input" => "§aPlease enter the amount to transfer!"
-      
+      "menu.button.page.total" => "§b%1 §f/ §9%2"
     ];
   }
 }
