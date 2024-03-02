@@ -54,6 +54,8 @@ class Vietnamese {
       "bank.withdraw.transaction" => "§aRút §b%1 §ara khỏi ngân hàng!",
       "bank.withdraw.fail" => "§cBạn không đủ số tiền §b%1 §ctrong ngân hàng để rút!",
       
+      "bank.transfer.custom_message" => "§aNhập §ball §ađể chuyển toàn bộ §f/§a Nhập §bcancel §ađể hủy thao tác",
+      
       "bank.create_bank_note" => "§aNhập §ball §ađể tạo ngân phiếu với toàn bộ số tiền §f/§a Nhập §bcancel §ađể hủy thao tác",
       
       "banknote.create.name" => "§l§bNGÂN PHIẾU",
@@ -68,6 +70,8 @@ class Vietnamese {
       
       "menu.title.bank_transaction_history" => "§bLịch Sử Giao Dịch",
       
+      "menu.title.bank_transfer" => "§bBankGUI §f| §cTRANSFER",
+      
       "menu.button.1" => "§aChuyển khoản",
       "menu.button.2" => "§aTạo ngân phiếu",
       "menu.button.3" => "§aLịch sử giao dịch",
@@ -77,14 +81,7 @@ class Vietnamese {
       
       "menu.button.page.next" => "§bTrang tiếp theo",
       "menu.button.page.previous" => "§bTrang trước",
-      "menu.button.page.total" => "§b%1 §f/ §9%2",
-      
-      "form.title" => "§bBankGUI §f| §cTRANSFER",
-      "form.dropdown" => "Chọn người chơi:",
-      "form.input" => "§aNhập số tiền muốn chuyển",
-      
-      "form.not_input" => "§aVui lòng nhập số tiền để chuyển khoản!"
-
+      "menu.button.page.total" => "§b%1 §f/ §9%2"
     ];
   }
 }
