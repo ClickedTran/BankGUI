@@ -160,6 +160,79 @@ class EventListener implements Listener {
        }
     }
     
+    if(isset($this->plugin->transferToPlayer[$player->getName()])){
+      $event->cancel();
+      $args = explode(" ", $event->getMessage());
+      $players = $this->plugin->transferToPlayer[$player->getName()];
+      if($args[0] != "all" and $args[0] != "cancel" and !is_numeric($args[0])){
+        $player->sendMessage(BankGUI::PREFIX . LanguageManager::getTranslate("bank.error"));
+         unset($this->plugin->transferToPlayer[$player->getName()]);
+         return;
+      }else{
+        if($args[0] == "all"){
+          $money = $this->plugin->getBankManager($player)->getMoney();
+          $this->plugin->getBankManager($this->plugin->getServer()->getPlayerExact($players))->addMoney($money);
+          $this->plugin->getBankManager($player)->reduceMoney($money);
+          $this->plugin->getBankManager($player)->addTransaction(LanguageManager::getTranslate(
+              "playerinfo.transfer.transaction",
+              ["$".$money, "$players"]
+              ));
+          $this->plugin->getBankManager($this->plugin->getServer()->getPlayerExact($players))->addTransaction(LanguageManager::getTranslate(
+              "playerinfo.transfer.player_claimed.transaction",
+              ["$".$money, $player->getName()]
+              )); 
+          $player->sendMessage(BankGUI::PREFIX . LanguageManager::getTranslate(
+              "playerinfo.transfer.successfully",
+              ["$".$money, "$players"]
+              ));
+          $this->plugin->getServer()->getPlayerExact($players)->sendMessage(BankGUI::PREFIX . LanguageManager::getTranslate(
+              "playerinfo.transfer.player_claimed.successfully",
+              ["$".$money, $player->getName()]
+              ));
+          unset($this->plugin->transferToPlayer[$player->getName()]);
+        }
+        
+        if($args[0] == "cancel"){
+          unset($this->plugin->transferToPlayer[$player->getName()]);
+          $player->sendMessage(BankGUI::PREFIX . LanguageManager::getTranslate("bank.cancel"));
+        }
+        
+        if(is_numeric($args[0])){
+          if((int)$args[0] < 0){
+             $player->sendMessage(LanguageManager::getTranslate("bank.error"));
+             return;
+          }
+          $money = $this->plugin->getBankManager($player)->getMoney();
+          if($money < (int)$args[0]){
+            $player->sendMessage(BankGUI::PREFIX . LanguageManager::getTranslate("playerinfo.transfer.fail",
+            ["$".$args[0], "$players"]
+            ));
+            unset($this->plugin->transferToPlayer[$player->getName()]);
+            return;
+          }else{
+            $this->plugin->getBankManager($player)->reduceMoney((int)$args[0]);
+            $this->plugin->getBankManager($player)->addTransaction(LanguageManager::getTranslate("playerinfo.transfer.transaction",
+            ["$".$args[0], "$players"]
+            ));
+            $player->sendMessage(BankGUI::PREFIX . LanguageManager::getTranslate(
+            "playerinfo.transfer.successfully",
+            ["$".$args[0], "$players"]
+            ));
+            
+            $this->plugin->getBankManager($this->plugin->getServer()->getPlayerExact($players))->addMoney((int)$args[0]);
+            $this->plugin->getBankManager($this->plugin->getServer()->getPlayerExact($players))->addTransaction(LanguageManager::getTranslate("playerinfo.transfer.player_claimed.transaction",
+            ["$".$args[0], $player->getName()]
+            ));
+            $this->plugin->getServer()->getPlayerExact($players)->sendMessage(BankGUI::PREFIX . LanguageManager::getTranslate(
+            "playerinfo.transfer.player_claimed.successfully",
+            ["$".$args[0], "$players"]
+            ));
+            unset($this->plugin->transferToPlayer[$player->getName()]);
+          }
+        }
+      }
+    }
+    
     if(isset($this->plugin->bankNote[$player->getName()])){
        $event->cancel();
        $args = explode(" ", $event->getMessage());
