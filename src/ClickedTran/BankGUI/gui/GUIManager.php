@@ -21,8 +21,6 @@ use pocketmine\item\enchantment\EnchantmentInstance;
 use muqsit\invmenu\InvMenu;
 use muqsit\invmenu\transaction\{InvMenuTransaction, InvMenuTransactionResult};
 
-use jojoe77777\FormAPI\CustomForm;
-
 use ClickedTran\BankGUI\BankGUI;
 use ClickedTran\BankGUI\language\LanguageManager;
 
@@ -296,85 +294,83 @@ class GUIManager {
     
     $menu->send($player);
   }
-  
-  public function transferPlayer(Player $player) : void{
+   
+   public function transferPlayer(Player $player, int $pages = 1) : void{
     $plugin = BankGUI::getInstance();
+    $menu = InvMenu::create(InvMenu::TYPE_DOUBLE_CHEST);
+    $menu->readonly();
+    $menu->setName(LanguageManager::getTranslate(
+      "menu.title.bank_transfer"
+      ));
+    $inv = $menu->getInventory();
+    for($a = 45; $a <= 53; ++$a){
+       $inv->setItem($a, StringToItemParser::getInstance()->parse("barrier")->setCustomName("§r"));
+    }
     
-    $list = [];
-    foreach($plugin->getServer()->getOnlinePlayers() as $players){
+    $inv->setItem(45, StringToItemParser::getInstance()->parse("paper")->setCustomName(LanguageManager::getTranslate("menu.button.back")));
+    
+    if($pages > 1){
+       $inv->setItem(48, StringToItemParser::getInstance()->parse("arrow")->setCustomName(LanguageManager::getTranslate("menu.button.page.previous")));
+    }
+    
+    $i = 0;
+    $data = $plugin->getServer()->getOnlinePlayers();
+    arsort($data);
+    $playerList = self::MAX_LIST;
+    $total_page = ceil(count($data) / $playerList);
+    $start = ($pages - 1) * $playerList;
+    $end = min($start + $playerList, count($data));
+    foreach($data as $players){
       if($players->getName() !== $player->getName()){
-        $list[] = $players->getName();
+        if($i >= $start && $i < $end){
+          $inv->setItem($i, StringToItemParser::getInstance()->parse("player_head")->setCustomName($players->getName())->setLore(["\n§l§bClick To Transfer Money"]));
+          $i++;
+        }
       }
     }
-    $this->listPlayer[$player->getName()] = $list;
     
-    $form = new CustomForm(function(Player $player, $data) use ($plugin){
-      if($data === null){
-         $this->bankMenu($player);
-        return;
-      }
-      
-      $transfer_played = $this->listPlayer[$player->getName()][$data[1]];
-      
-     /** if(!isset($transfer_played)){
-        $player->sendMessage(BankGUI::PREFIX . LanguageManager::getTranslate(
-          ""
-          ));
-        return;
-      }*/
-      
-      if(!isset($data[2]) or !is_numeric($data[2]) or $data[2] < 0){
-         $player->sendMessage(BankGUI::PREFIX . LanguageManager::getTranslate(
-           "form.not_input"
-           ));
-         return;
-      }
-      
-      if(!file_exists($plugin->getDataFolder() . "bank/".$transfer_played.".yml")){
-         $player->sendMessage(BankGUI::PREFIX . LanguageManager::getTranslate(
-           "playerinfo.not_exists",
-           ["$transfer_played"]
-           ));
-         return;
-      }
-      
-      if($plugin->getBankManager($player)->getMoney() < $data[2]){
-         $player->sendMessage(BankGUI::PREFIX . LanguageManager::getTranslate(
-           "playerinfo.transfer.fail",
-           ["$".$data[2], "$transfer_played"]
-           ));
-         return;
-      }
-      
-      $plugin->getBankManager($player)->reduceMoney((int)$data[2]);
-      $plugin->getBankManager($plugin->getServer()->getPlayerExact($transfer_played))->addMoney((int)$data[2]);
-      
-      $plugin->getBankManager($player)->addTransaction(LanguageManager::getTranslate(
-        "playerinfo.transfer.transaction",
-        ["$".$data[2], "$transfer_played"]
-        ));
-      $plugin->getBankManager($plugin->getServer()->getPlayerExact($transfer_played))->addTransaction(LanguageManager::getTranslate(
-        "playerinfo.transfer.player_claimed.transaction",
-        ["$".$data[2], $player->getName()]
-        ));
+    $inv->setItem(49, StringToItemParser::getInstance()->parse("lime_wool")->setCustomName(LanguageManager::getTranslate(
+      "menu.button.page.total",
+    ["$pages", "$total_page"]))->addEnchantment(new EnchantmentInstance(EnchantmentIdMap::getInstance()->fromId(BankGUI::FAKE_ENCHANTMENT))));
+    
+    if($total_page > $pages){
+       $inv->setItem(50, StringToItemParser::getInstance()->parse("arrow")->setCustomName(LanguageManager::getTranslate("menu.button.page.next")));
+    }
+    
+    $menu->setListener(function(InvMenuTransaction $transaction) use ($plugin, $player, $pages, $total_page) : InvMenuTransactionResult {
+      $action = $transaction->getAction();
+      $item = $transaction->getItemClicked();
         
-      $player->sendMessage(BankGUI::PREFIX . LanguageManager::getTranslate(
-        "playerinfo.transfer.successfully",
-        ["$".$data[2], "$transfer_played"]
-        ));
-      $plugin->getServer()->getPlayerExact($transfer_played)->sendMessage(BankGUI::PREFIX . LanguageManager::getTranslate(
-        "playerinfo.transfer.player_claimed.successfully",
-        ["$".$data[2], $player->getName()]
-        ));
+      switch($item->getCustomName()){
+        case LanguageManager::getTranslate("menu.button.page.next"):
+          if(($pages + 1) > $total_page) break;
+            $pages++;
+            $this->transactionHistory($player, (int)$pages);
+        break;
+        case LanguageManager::getTranslate("menu.button.page.previous"):
+          if(($pages - 1) < 0) break;
+            $pages--;
+            $this->transactionHistory($player, (int)$pages);
+        break;
+        case "§r":
+        break;
+        case LanguageManager::getTranslate("menu.button.back"):
+          $player->removeCurrentWindow();
+          $this->bankMenu($player);
+        break;  
+        case LanguageManager::getTranslate("menu.button.page.total"):
+        break;
+        default:
+          $plugin->transferToPlayer[$player->getName()] = $item->getCustomName();
+          $player->removeCurrentWindow();
+          $player->sendMessage(LanguageManager::getTranslate(
+            "bank.transfer.custom_message"
+            ));
+        break;
+      }
+      return $transaction->discard();
     });
-    $form->setTitle(LanguageManager::getTranslate("form.title"));
-    $form->addLabel(LanguageManager::getTranslate(
-      "playerinfo.money_in_bank",
-      ["$".$plugin->getBankManager($player)->getMoney()]));
-    $form->addDropdown(LanguageManager::getTranslate(
-      "form.dropdown"),
-      $this->listPlayer[$player->getName()]);
-    $form->addInput(LanguageManager::getTranslate("form.input"), "example: 1000");
-    $player->sendForm($form);
-  }
+    
+    $menu->send($player);
+   }
 }
