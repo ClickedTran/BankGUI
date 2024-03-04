@@ -19,7 +19,8 @@ use pocketmine\utils\Config;
 use ClickedTran\BankGUI\BankGUI;
 use ClickedTran\BankGUI\language\data\{
   Vietnamese,
-  English
+  English,
+  Hindi
 };
 
 class LanguageManager {
@@ -61,6 +62,12 @@ class LanguageManager {
     
     if($this->getLanguage() === "en-US"){
       foreach(English::init() as $key => $value){
+        LanguageManager::getLangData()->setNested($key, $value);
+      }
+    }
+
+    if($this->getLanguage() === "hi-IN"){
+      foreach(Hindi::init() as $key => $value){
         LanguageManager::getLangData()->setNested($key, $value);
       }
     }
