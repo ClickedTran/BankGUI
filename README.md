@@ -38,9 +38,9 @@ interest: 0.1 #cannot be less than 0, example: `0.1`
 ## Language Supported
 - [x] Vietnamese (vi-VN)
 - [x] English (en-US)
+- [x] Hindi (hi-IN)
 <br>
-If you want a language of your country in this plugin please contact me via <b>discord, facebook, telegram</b>
-
+If you want a language of your country in this plugin please translate file `English.php` into your country's language
 ## Virions
 - [InvMenu](https://github.com/muqsit/InvMenu)(Muqsit)
 - [FormAPI](https://github.com/jojoe77777/FormAPI)(jojoe77777)
