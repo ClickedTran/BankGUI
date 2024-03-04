@@ -20,7 +20,12 @@
 
 ## Config
 ```yaml
-language: en-US #change it to `vi-VN` if you want use Vietnamese language!
+#language list:
+#vi-VN => Vietnamese
+#en-US => English
+#hi-IN => Hindi
+
+language: en-US
 economy-type:
  provider: economyapi #change it to `bedrockeconomy` if you want use BedrockEconomy!
 
