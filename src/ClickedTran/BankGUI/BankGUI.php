@@ -44,7 +44,8 @@ class BankGUI extends PluginBase
   public array $language_supported =
   [
     "vi-VN",
-    "en-US"
+    "en-US",
+    "hi-IN"
   ];
   
  /**-----------@var BankGUI---------*/
