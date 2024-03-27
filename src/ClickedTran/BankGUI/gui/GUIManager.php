@@ -243,7 +243,6 @@ class GUIManager {
     
     $i = 0;
     $data = $plugin->getBankManager($player)->getTransaction();
-    arsort($data);
     $playerList = self::MAX_LIST;
     $total_page = ceil(count($data) / $playerList);
     $start = ($pages - 1) * $playerList;
